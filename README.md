@@ -22,6 +22,9 @@ $ cd ~/FFmpegUI
 $ chmod +x setup.sh
 $ ./setup.sh
 ```
+
+add a video file or rar/zip to /var/www/html/FFmpeg_UI/media/input
+
 then go to http://your-ip/FFmpeg_UI
 
 # Installation example:
