@@ -1,0 +1,15 @@
+Example for Proxmox 5.2
+lxc intel cpu passthrough
+--------------------------------------------------------------------------
+on host:
+
+lxc-stop -n 100
+
+nano /etc/pve/lxc/100.conf
+
+add:
+lxc.mount.entry = /dev/dri/renderD128 dev/dri/renderD128 none bind,optional,create=file
+lxc.cgroup.devices.allow = c 226:* rwm
+
+lxc-start -n 100
+-----------------------------------------------------------------------------
