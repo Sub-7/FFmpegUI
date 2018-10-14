@@ -11,7 +11,7 @@ FFmpegUI is a graphical web interface for the famous FFmpeg.
 - download files
 
 # Installation
- tested with Ubuntu 16.04 / 18.04
+ tested with Ubuntu 18.04
  
  example as root:
 
