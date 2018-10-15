@@ -245,6 +245,7 @@ cp -R ~/bin /usr/local
     if [[ ${choices[6]} ]]; then
         #Option 5 selected
 		echo $'\n'"$(tput setaf 2) ...setting up FFmpegUI and Apache2$(tput sgr 0)"$'\n'
+		export LANG=C.UTF-8
 		apt-add-repository ppa:ondrej/php
 		sudo apt update -qq && sudo apt dist-upgrade -qq && sudo apt -y install \
         php7.2-bcmath php7.2-zip php7.2-dev php7.2-xml php-pear apache2 libapache2-mod-php7.2 rar
