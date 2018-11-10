@@ -1,4 +1,4 @@
-# FFmpegUI [![Build Status](https://travis-ci.com/Sub-7/FFmpegUI.svg?branch=master)](https://travis-ci.com/Sub-7/FFmpegUI) ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)
+# FFmpegUI [![Build Status](https://travis-ci.com/Sub-7/FFmpegUI.svg?branch=master)](https://travis-ci.com/Sub-7/FFmpegUI) ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg) ![TeamCity (full build status)](https://img.shields.io/teamcity/http/teamcity.jetbrains.com/e/bt345.svg)
 FFmpegUI is a graphical web interface for the famous FFmpeg.
 
 # Features
