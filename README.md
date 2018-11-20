@@ -1,4 +1,4 @@
-# FFmpegUI [![Build Status](https://travis-ci.com/Sub-7/FFmpegUI.svg?branch=master)](https://travis-ci.com/Sub-7/FFmpegUI) ![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg) 
+# FFmpegUI [![Build Status](https://travis-ci.com/Sub-7/FFmpegUI.svg?branch=master)](https://travis-ci.com/Sub-7/FFmpegUI) ![Hex.pm](https://img.shields.io/hexpm/l/:package.svg)
 FFmpegUI is a graphical web interface for the famous FFmpeg.
 
 # Features
@@ -23,7 +23,7 @@ $ chmod +x setup.sh
 $ ./setup.sh
 ```
 
-add a video file or rar/zip to /var/www/html/FFmpeg_UI/media/input
+add a video file to /var/www/html/FFmpeg_UI/media/input
 
 then go to http://your-ip/FFmpeg_UI
 
