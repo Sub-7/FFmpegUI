@@ -1,4 +1,4 @@
-# FFmpegUI [![Build Status](https://travis-ci.com/Sub-7/FFmpegUI.svg?branch=master)](https://travis-ci.com/Sub-7/FFmpegUI) ![Hex.pm](https://img.shields.io/hexpm/l/:package.svg)
+# FFmpegUI [![Build Status](https://travis-ci.com/Sub-7/FFmpegUI.svg?branch=master)](https://travis-ci.com/Sub-7/FFmpegUI) ![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg?style=plastic)
 FFmpegUI is a graphical web interface for the famous FFmpeg.
 
 # Features
