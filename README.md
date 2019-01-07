@@ -2,6 +2,7 @@
 FFmpegUI is a graphical web interface for the famous FFmpeg.
 
 ![alt text](https://abload.de/img/ffmpeg4efcu.png)
+[![IMAGE ALT TEXT HERE](https://abload.de/img/ffmpeg4efcu.png)](https://www.youtube.com/watch?v=nWvz52jdOQs)
 
 # Features
 - almost everything FFmpeg can do with videos
