@@ -7,7 +7,7 @@ FFmpegUI is a graphical web interface for the famous FFmpeg.
 - almost everything FFmpeg can do with videos
 - Hardware encoding with VAAPI and CUDA
 - ...soon Blu-Ray/DVD Ripping support
-- PROXMOX LXC & CT support
+- PROXMOX KVM & LXC support
 
 # Installation
  tested with Ubuntu 18.04
