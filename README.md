@@ -6,11 +6,8 @@ FFmpegUI is a graphical web interface for the famous FFmpeg.
 # Features
 - almost everything FFmpeg can do with videos
 - Hardware encoding with VAAPI and CUDA
-- folder unpack zip or rar
-- rename files
-- remove spaces
-- move and delete files
-- download files
+- ...soon Blu-Ray/DVD Ripping support
+- PROXMOX LXC & CT support
 
 # Installation
  tested with Ubuntu 18.04
@@ -27,7 +24,7 @@ $ ./setup.sh
 
 add a video file to /var/www/html/FFmpeg_UI/media/input
 
-then go to http://your-ip/FFmpeg_UI
+then go to http://localhost/FFmpeg_UI or http://ip/FFmpeg_UI
 
 # Installation example:
 
