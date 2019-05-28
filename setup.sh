@@ -26,8 +26,8 @@ NV_V=HW-info/NV_DR_V
 
 #Menu options
 options[0]=" 1 Install Dependencies"
-options[1]=" 2 Install NVIDIA driver (Bare Metal)"
-options[2]=" 3 Install NVIDIA driver (Proxmox KVM+LXC)"
+options[1]=" 2 Install NVIDIA driver (Bare Metal+KVM)"
+options[2]=" 3 Install NVIDIA driver (Proxmox LXC)"
 options[3]=" 4 Install CUDA"
 options[4]=" 5 Install FFmpeg (supports VAAPI+CUDA)"
 options[5]=" 6 Install FFmpeg (supports VAAPI)"
@@ -62,7 +62,7 @@ function ACTIONS {
         #Option 2 selected
         echo $'\n'"$(tput setaf 2) ...setting up NVIDIA Driver$(tput sgr 0)"$'\n'
 		wget http://de.download.nvidia.com/XFree86/Linux-x86_64/396.24/NVIDIA-Linux-x86_64-396.24.run
-		sh ./NVIDIA-Linux-x86_64-396.24.run
+		sh ./NVIDIA-Linux-x86_64-396.24.run --no-cc-version-check
 		rm -r NVIDIA-Linux-x86_64-396.24.run
 		nvidia-smi
 		echo $'\n'"$(tput setaf 2) NVIDIA Driver are installed.$(tput sgr 0)"$'\n'
@@ -72,7 +72,7 @@ function ACTIONS {
 
         echo $'\n'"$(tput setaf 2) ...setting up NVIDIA Driver$(tput sgr 0)"$'\n'
 		wget http://de.download.nvidia.com/XFree86/Linux-x86_64/396.24/NVIDIA-Linux-x86_64-396.24.run
-		sh ./NVIDIA-Linux-x86_64-396.24.run --no-kernel-module
+		sh ./NVIDIA-Linux-x86_64-396.24.run --no-kernel-module --no-cc-version-check
 		rm -r NVIDIA-Linux-x86_64-396.24.run
 		nvidia-smi
 		echo $'\n'"$(tput setaf 2) NVIDIA Driver are installed.$(tput sgr 0)"$'\n'
