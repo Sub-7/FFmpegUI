@@ -95,7 +95,7 @@ function ACTIONS {
 			echo "/usr/local/cuda-9.2/lib64" >> /etc/ld.so.conf
             echo "/usr/local/cuda-9.2/bin" >> /etc/ld.so.conf
             echo "/usr/local/cuda/include" >> /etc/ld.so.conf
-			sudo source ~/.profile
+			source ~/.profile
 			sudo ldconfig
 		
 		echo $'\n'"$(tput setaf 2) CUDA are installed.$(tput sgr 0)"$'\n'
