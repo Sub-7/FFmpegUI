@@ -14,6 +14,14 @@ FFmpegUI is a graphical web interface for the famous FFmpeg.
  
  example as root:
 
+FIRST OF ALL:
+if you install nvidia drivers you have to add "nouveau" to the blacklist.
+```sh
+$ echo $'blacklist nouveau\noptions nouveau modeset=0' >/etc/modprobe.d/nvidia-installer-disable-nouveau.conf
+$ update-initramfs -u
+$ reboot
+```
+
 ```sh
 $ apt -y install git
 $ git clone https://github.com/Sub-7/FFmpegUI.git
