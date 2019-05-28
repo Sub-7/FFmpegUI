@@ -26,7 +26,7 @@ NV_V=HW-info/NV_DR_V
 
 #Menu options
 options[0]=" 1 Install Dependencies"
-options[1]=" 2 Install NVIDIA driver (Bare Metal+KVM)"
+options[1]=" 2 Install NVIDIA driver (Bare Metal + Proxmox KVM)"
 options[2]=" 3 Install NVIDIA driver (Proxmox LXC)"
 options[3]=" 4 Install CUDA"
 options[4]=" 5 Install FFmpeg (supports VAAPI+CUDA)"
