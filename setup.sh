@@ -72,7 +72,7 @@ function ACTIONS {
 
         echo $'\n'"$(tput setaf 2) ...setting up NVIDIA Driver$(tput sgr 0)"$'\n'
 		wget http://de.download.nvidia.com/XFree86/Linux-x86_64/396.24/NVIDIA-Linux-x86_64-396.24.run
-		sh ./NVIDIA-Linux-x86_64-396.24.run --no-kernel-module --no-cc-version-check
+		sh ./NVIDIA-Linux-x86_64-396.24.run --no-kernel-module
 		rm -r NVIDIA-Linux-x86_64-396.24.run
 		nvidia-smi
 		echo $'\n'"$(tput setaf 2) NVIDIA Driver are installed.$(tput sgr 0)"$'\n'
