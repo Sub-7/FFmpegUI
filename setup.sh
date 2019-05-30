@@ -61,9 +61,10 @@ function ACTIONS {
     if [[ ${choices[1]} ]]; then
         #Option 2 selected
         echo $'\n'"$(tput setaf 2) ...setting up NVIDIA Driver$(tput sgr 0)"$'\n'
-		wget http://de.download.nvidia.com/XFree86/Linux-x86_64/396.24/NVIDIA-Linux-x86_64-396.24.run
-		sh ./NVIDIA-Linux-x86_64-396.24.run --no-cc-version-check
-		rm -r NVIDIA-Linux-x86_64-396.24.run
+		#wget http://de.download.nvidia.com/XFree86/Linux-x86_64/396.24/NVIDIA-Linux-x86_64-396.24.run
+		wget http://de.download.nvidia.com/XFree86/Linux-x86_64/430.14/NVIDIA-Linux-x86_64-430.14.run
+		sh ./NVIDIA-Linux-x86_64-430.14.run
+		rm -r ./NVIDIA-Linux-x86_64-430.14.run
 		nvidia-smi
 		echo $'\n'"$(tput setaf 2) NVIDIA Driver are installed.$(tput sgr 0)"$'\n'
     fi
@@ -71,9 +72,10 @@ function ACTIONS {
         #Option 2 selected
 
         echo $'\n'"$(tput setaf 2) ...setting up NVIDIA Driver$(tput sgr 0)"$'\n'
-		wget http://de.download.nvidia.com/XFree86/Linux-x86_64/396.24/NVIDIA-Linux-x86_64-396.24.run
-		sh ./NVIDIA-Linux-x86_64-396.24.run --no-kernel-module
-		rm -r NVIDIA-Linux-x86_64-396.24.run
+		#wget http://de.download.nvidia.com/XFree86/Linux-x86_64/396.24/NVIDIA-Linux-x86_64-396.24.run
+		wget http://de.download.nvidia.com/XFree86/Linux-x86_64/430.14/NVIDIA-Linux-x86_64-430.14.run
+		sh ./NVIDIA-Linux-x86_64-430.14.run --no-kernel-module
+		rm -r ./NVIDIA-Linux-x86_64-430.14.run
 		nvidia-smi
 		echo $'\n'"$(tput setaf 2) NVIDIA Driver are installed.$(tput sgr 0)"$'\n'
 
@@ -81,19 +83,20 @@ function ACTIONS {
     if [[ ${choices[3]} ]]; then
         #Option 3 selected
 		echo $'\n'"$(tput setaf 2) ...setting up CUDA$(tput sgr 0)"$'\n'
-		if [ -e "cuda_9.2.148_396.37_linux" ]; then
+		if [ -e "cuda_10.1.168_418.67_linux.run" ]; then
 		    apt install -y libxmu-dev
-		    sh ./cuda_9.2.148_396.37_linux -silent -verbose -toolkit -samples
+		    sh ./cuda_10.1.168_418.67_linux.run -silent -verbose -toolkit -samples
 		  else
-		    wget https://developer.nvidia.com/compute/cuda/9.2/Prod2/local_installers/cuda_9.2.148_396.37_linux
+		    #wget https://developer.nvidia.com/compute/cuda/9.2/Prod2/local_installers/cuda_9.2.148_396.37_linux
+		    wget https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda_10.1.168_418.67_linux.run
             apt install -y libxmu-dev
-			sh ./cuda_9.2.148_396.37_linux -silent -verbose -toolkit -samples
+			sh ./cuda_10.1.168_418.67_linux.run -silent -verbose -toolkit -samples
 
 		fi
 			echo "export LD_LIBRARY_PATH=/usr/local/cuda/lib64" >> ~/.profile
-			echo "PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-9.2/bin'" >> ~/.profile
-			echo "/usr/local/cuda-9.2/lib64" >> /etc/ld.so.conf
-            echo "/usr/local/cuda-9.2/bin" >> /etc/ld.so.conf
+			echo "PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-10.1/bin'" >> ~/.profile
+			echo "/usr/local/cuda-10.1/lib64" >> /etc/ld.so.conf
+            echo "/usr/local/cuda-10.1/bin" >> /etc/ld.so.conf
             echo "/usr/local/cuda/include" >> /etc/ld.so.conf
 			source ~/.profile
 			sudo ldconfig
