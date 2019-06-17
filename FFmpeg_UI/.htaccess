@@ -1,4 +1,0 @@
-AuthUserFile /var/.htpasswd
-AuthName "Please enter your ID and password"
-AuthType Basic
-require valid-user
