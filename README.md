@@ -6,21 +6,13 @@ FFmpegUI is a graphical web interface for the famous FFmpeg.
 # Features
 - almost everything FFmpeg can do with videos
 - Hardware encoding with VAAPI and CUDA
-- ...soon Blu-Ray/DVD Ripping support
+- Blu-Ray/DVD Ripping support
 - PROXMOX KVM & LXC support
 
 # Installation
- tested with Ubuntu 18.04
+ tested and recommended on Ubuntu 18.04
  
  example as root:
-
-FIRST OF ALL:
-if you install nvidia drivers you have to add "nouveau" to the blacklist.
-```sh
-$ echo $'blacklist nouveau\noptions nouveau modeset=0' >/etc/modprobe.d/nvidia-installer-disable-nouveau.conf
-$ update-initramfs -u
-$ reboot
-```
 
 ```sh
 $ apt -y install git
