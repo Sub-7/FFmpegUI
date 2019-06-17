@@ -122,7 +122,7 @@ echo "</br><details><summary>FFmpeg encoding history</summary><pre>$compile_ffmp
 	  <details><summary>FFmpeg</summary><pre><?php require('include/ffmpeg_info.php'); ?></pre></details>
   </footer>
   <!-- Copyrights Section -->
-  <div class="copyright">&copy;<?php echo date("Y"); ?> FFmpeg UI v1.0</div>
+  <div class="copyright">&copy;<?php echo date("Y"); ?> FFmpeg UI v1.01</div>
 </div>
 <!-- Main Container Ends -->
 </body>
