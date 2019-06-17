@@ -1,5 +1,5 @@
 # FFmpegUI v1.01 [![Build Status](https://travis-ci.com/Sub-7/FFmpegUI.svg?branch=master)](https://travis-ci.com/Sub-7/FFmpegUI) ![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)
-FFmpegUI is a graphical web interface for the famous FFmpeg.
+FFmpegUI is a graphical web interface for the famous FFmpeg + MakeMKV.
 
 [![FFmpegUI](http://img.youtube.com/vi/nWvz52jdOQs/0.jpg)](http://www.youtube.com/watch?v=nWvz52jdOQs "FFmpegUI")
 
