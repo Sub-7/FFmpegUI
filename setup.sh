@@ -303,7 +303,7 @@ clear
 function MENU {
 
 if [ $distribution = "ubuntu6418.4" ]; then
-      echo $'\n'$hr"$(tput setaf 2) FFmpegUI v.1.1 installation (VAAPI + CUDA)$(tput sgr 0)"$'\n'$hr
+      echo $'\n'$hr"$(tput setaf 2) FFmpegUI v.1.01 installation (VAAPI + CUDA)$(tput sgr 0)"$'\n'$hr
       echo  " Distribution: $(tput setaf 2)$OS $ARCH $VERSION   $(tput sgr 0)"
     fi
 
