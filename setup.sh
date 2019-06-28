@@ -1,7 +1,7 @@
 #!/bin/bash
-#  FFmpegUI
+#  FFmpegUI V1.01
 #  ffmpeg-4.1.3
-#  Sub-7 (30.05.2019)
+#  Sub-7 (28.06.2019)
 #==============================================================================
     
     OS=$(awk '/DISTRIB_ID=/' /etc/*-release | sed 's/DISTRIB_ID=//' | tr '[:upper:]' '[:lower:]')
@@ -303,7 +303,7 @@ clear
 function MENU {
 
 if [ $distribution = "ubuntu6418.4" ]; then
-      echo $'\n'$hr"$(tput setaf 2) FFmpegUI v.1.0 installation (VAAPI + CUDA)$(tput sgr 0)"$'\n'$hr
+      echo $'\n'$hr"$(tput setaf 2) FFmpegUI v.1.1 installation (VAAPI + CUDA)$(tput sgr 0)"$'\n'$hr
       echo  " Distribution: $(tput setaf 2)$OS $ARCH $VERSION   $(tput sgr 0)"
     fi
 
