@@ -43,5 +43,7 @@ intel CPU supports VAAPI
 ```
 # Known issues:
 -Filemanager does not start
+# To Do:
+redesign
 # License:
 MIT
