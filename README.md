@@ -1,7 +1,7 @@
 # FFmpegUI v2.0 [![Build Status](https://travis-ci.com/Sub-7/FFmpegUI.svg?branch=master)](https://travis-ci.com/Sub-7/FFmpegUI) ![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)
 FFmpegUI is a graphical web interface for the famous FFmpeg 
 
-# Features
+# Features:
 - almost everything FFmpeg can do with videos
 - Hardware encoding with VAAPI and CUDA*
 - Blu-Ray/DVD Ripping
@@ -13,7 +13,7 @@ FFmpegUI is a graphical web interface for the famous FFmpeg
 is due to FFmpeg or CUDA,
 if you have success please tell me versions of FFmpeg, CUDA and Nvidia drivers.
 
-# Installation
+# Installation:
  tested and recommended on Ubuntu 18.04
  
  example as root:
@@ -39,5 +39,5 @@ intel CPU supports VAAPI
  [x] 7 Install Apache2 and FFmpegUI
  [ ] 8 reboot
 ```
-# License
+# License:
 MIT
