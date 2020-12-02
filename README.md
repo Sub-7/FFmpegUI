@@ -15,6 +15,7 @@ if you have success please tell me versions of FFmpeg, CUDA and Nvidia drivers.
 
 # Installation:
  tested and recommended on Ubuntu 20.04
+ 
  example as root:
 ```sh
 $ apt -y install git
