@@ -45,5 +45,7 @@ intel CPU supports VAAPI
 -Filemanager does not start
 # To Do:
 redesign
+get MakeMKV to run in LXC
+get CUDA to run in LXC
 # License:
 MIT
