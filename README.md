@@ -15,6 +15,7 @@ if you have success please tell me versions of FFmpeg, CUDA and Nvidia drivers.
 
 # Installation:
  tested and recommended on Ubuntu 20.04
+ (if you want to convert it for a different distribution, an install.log will be created in the FFmpegUI folder during the installation, there you will find all errors and missing packages.)
  
  example as root:
 ```sh
