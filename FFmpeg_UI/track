@@ -1,3 +1,2 @@
-    Stream #0:0(eng): Video: h264 (High), yuv420p(progressive), 1920x1080 [SAR 1:1 DAR 16:9], 23.98 fps, 23.98 tbr, 1k tbn, 47.95 tbc (default)
-    Stream #0:1(deu): Audio: dts (DTS), 48000 Hz, 5.1(side), fltp, 768 kb/s (default)
-    Stream #0:2(deu): Subtitle: hdmv_pgs_subtitle (default)
+    Stream #0:0: Video: h264 (High), yuv420p(tv, bt709, progressive), 1920x1080 [SAR 1:1 DAR 16:9], 24 fps, 24 tbr, 1k tbn, 48 tbc (default)
+    Stream #0:1: Audio: aac (LC), 44100 Hz, stereo, fltp (default)

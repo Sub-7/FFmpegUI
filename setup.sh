@@ -1,5 +1,5 @@
 #!/bin/bash
-#  FFmpegUI V1.01
+#  FFmpegUI V2.0
 #  ffmpeg-4.1.3
 #  Sub-7 (28.06.2019)
 #==============================================================================
@@ -13,11 +13,11 @@
     if [ -z "$VERSION" ]; then
       VERSION=$(awk '{print $3}' /etc/*-release)
     fi
-   
-distribution=$OS$ARCH$VERSION
+mkdir HW-info
+distribution=$OS$ARCH
 hr=$(printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -)
 lshw -C processor | grep product > HW-info/CPU
-lshw -C system | grep product > HW-info/SYSTEM
+dmidecode -t 2 | grep product > HW-info/SYSTEM
 lshw -C display | grep product > HW-info/GPU
 CPU=HW-info/CPU
 GPU=HW-info/GPU
@@ -31,19 +31,19 @@ actualsize3=$(wc -c <"$CPU")
 if [ $actualsize1 -ge $minsize ]; then
     echo size is over $minsize bytes
 else
-    lshw -C display | grep Produkt > HW-info/GPU
+    lshw -C display | grep Product > HW-info/GPU
 fi
 
 if [ $actualsize2 -ge $minsize ]; then
     echo size is over $minsize bytes
 else
-    lshw -C system | grep Produkt > HW-info/SYSTEM
+    dmidecode -t 2 | grep Product > HW-info/SYSTEM
 fi
 
 if [ $actualsize3 -ge $minsize ]; then
     echo size is over $minsize bytes
 else
-    lshw -C processor | grep Produkt > HW-info/CPU
+    lshw -C processor | grep Product > HW-info/CPU
 fi   
    
 
@@ -99,7 +99,7 @@ function ACTIONS {
 		sh ./NVIDIA-Linux-x86_64-430.14.run
 		rm -r NVIDIA-Linux-x86_64-430.14.run
 		nvidia-smi
-		echo $'\n'"$(tput setaf 2) NVIDIA Driver are installed.$(tput sgr 0)"$'\n'
+		echo $'\n'"$(tput setaf 2) NVIDIA Driver installed.$(tput sgr 0)"$'\n'
     fi
   
     if [[ ${choices[3]} ]]; then
@@ -109,7 +109,7 @@ function ACTIONS {
 		sh ./NVIDIA-Linux-x86_64-430.14.run --no-kernel-module
 		rm -r NVIDIA-Linux-x86_64-430.14.run
 		nvidia-smi
-		echo $'\n'"$(tput setaf 2) NVIDIA Driver are installed.$(tput sgr 0)"$'\n'
+		echo $'\n'"$(tput setaf 2) NVIDIA Driver installed.$(tput sgr 0)"$'\n'
     fi	
     if [[ ${choices[4]} ]]; then
         #Option 5 selected
@@ -121,18 +121,18 @@ function ACTIONS {
 		    sh ./cuda_10.1.168_418.67_linux.run --silent --toolkit --samples
 		  else
 		    wget https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda_10.1.168_418.67_linux.run
-            apt-get install -y libxmu-dev
-			sh ./cuda_10.1.168_418.67_linux.run --silent --toolkit --samples
+                   apt-get -y --force-yes install libxmu-dev
+		    sh ./cuda_10.1.168_418.67_linux.run --silent --toolkit --samples
 
 		fi
 			echo "export LD_LIBRARY_PATH=/usr/local/cuda/lib64" >> ~/.profile
 			echo "PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-10.1/bin'" >> ~/.profile
 			echo "/usr/local/cuda-10.1/lib64" >> /etc/ld.so.conf
-            echo "/usr/local/cuda-10.1/bin" >> /etc/ld.so.conf
-            echo "/usr/local/cuda/include" >> /etc/ld.so.conf
+                       echo "/usr/local/cuda-10.1/bin" >> /etc/ld.so.conf
+                       echo "/usr/local/cuda/include" >> /etc/ld.so.conf
 			source ~/.profile
 			sudo ldconfig		
-			echo $'\n'"$(tput setaf 2) CUDA are installed.$(tput sgr 0)"$'\n'
+			echo $'\n'"$(tput setaf 2) CUDA installed.$(tput sgr 0)"$'\n'
     fi
 	
     if [[ ${choices[5]} ]]; then
@@ -146,8 +146,16 @@ function ACTIONS {
         rm -R ~/FFmpegUI/nv-codec-headers
         mkdir -p ~/ffmpeg_sources ~/bin
         cd ~/ffmpeg_sources && \
-        apt install nasm yasm
+        apt -y --force-yes install nasm yasm
 		
+        # Install libaom from source.
+        mkdir -p ~/ffmpeg_sources/libaom && \
+        cd ~/ffmpeg_sources/libaom && \
+        git clone https://aomedia.googlesource.com/aom && \
+        cmake ./aom && \
+        make && \
+        sudo make install
+
 		# Warning: libaom does not yet appear to have a stable API
 		
         #cd ~/ffmpeg_sources && \
@@ -159,9 +167,9 @@ function ACTIONS {
         #make install
 		
         cd ~/ffmpeg_sources && \
-        wget -O ffmpeg-4.1.3.tar.bz2 https://ffmpeg.org/releases/ffmpeg-4.1.3.tar.bz2 && \
-        tar xjvf ffmpeg-4.1.3.tar.bz2 && \
-        cd ~/ffmpeg_sources/ffmpeg-4.1.3 && \
+        wget -O ffmpeg-4.3.1.tar.bz2 https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.bz2 && \
+        tar xjvf ffmpeg-4.3.1.tar.bz2 && \
+        cd ~/ffmpeg_sources/ffmpeg-4.3.1 && \
          PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
            --prefix="$HOME/ffmpeg_build" \
            --pkg-config-flags="--static" \
@@ -186,12 +194,13 @@ function ACTIONS {
            --enable-cuvid \
            --enable-nvenc \
            --enable-libnpp \
+           --enable-libaom \
            --enable-nonfree && \
            PATH="$HOME/bin:$PATH" make && \
            make install && \
            hash -r
            cp -R ~/bin /usr/local
-           echo $'\n'"$(tput setaf 2) FFmpeg VAAPI+CUDA are installed.$(tput sgr 0)"$'\n'
+           echo $'\n'"$(tput setaf 2) FFmpeg VAAPI+CUDA installed.$(tput sgr 0)"$'\n'
     fi
 	
 	if [[ ${choices[6]} ]]; then
@@ -205,8 +214,16 @@ function ACTIONS {
         rm -R ~/FFmpegUI/nv-codec-headers
         mkdir -p ~/ffmpeg_sources ~/bin
         cd ~/ffmpeg_sources && \
-        apt-get install nasm yasm
+        apt-get -y install nasm yasm
 		
+        # Install libaom from source.
+        mkdir -p ~/ffmpeg_sources/libaom && \
+        cd ~/ffmpeg_sources/libaom && \
+        git clone https://aomedia.googlesource.com/aom && \
+        cmake ./aom && \
+        make && \
+        sudo make install
+
 		# Warning: libaom does not yet appear to have a stable API
 		
         #cd ~/ffmpeg_sources && \
@@ -218,9 +235,9 @@ function ACTIONS {
         #make install
 		
         cd ~/ffmpeg_sources && \
-        wget -O ffmpeg-4.1.3.tar.bz2 https://ffmpeg.org/releases/ffmpeg-4.1.3.tar.bz2 && \
-        tar xjvf ffmpeg-4.1.3.tar.bz2 && \
-        cd ~/ffmpeg_sources/ffmpeg-4.1.3 && \
+        wget -O ffmpeg-4.3.1.tar.bz2 https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.bz2 && \
+        tar xjvf ffmpeg-4.3.1.tar.bz2 && \
+        cd ~/ffmpeg_sources/ffmpeg-4.3.1 && \
         PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
            --prefix="$HOME/ffmpeg_build" \
            --pkg-config-flags="--static" \
@@ -239,40 +256,44 @@ function ACTIONS {
            --enable-libx264 \
            --enable-libx265 \
            --enable-vaapi \
+           --enable-libaom \
            --enable-nonfree && \
            PATH="$HOME/bin:$PATH" make && \
            make install && \
            hash -r
            cp -R ~/bin /usr/local
-        echo $'\n'"$(tput setaf 2) FFmpeg VAAPI are installed.$(tput sgr 0)"$'\n'
+        echo $'\n'"$(tput setaf 2) FFmpeg VAAPI installed.$(tput sgr 0)"$'\n'
     fi
 	
     if [[ ${choices[7]} ]]; then
         #Option 8 selected
 		echo $'\n'"$(tput setaf 2) ...setting up FFmpegUI and Apache2$(tput sgr 0)"$'\n'
-		apt-get install software-properties-common
-        add-apt-repository ppa:heyarje/makemkv-beta
-        apt update 
-        apt install makemkv-bin makemkv-oss -y
-		export LANG=C.UTF-8
-		apt-add-repository ppa:ondrej/php
-		sudo apt update -qq && sudo apt dist-upgrade -qq && sudo apt -y install \
-        php7.2-bcmath php7.2-zip php7.2-dev php7.2-xml php-pear apache2 libapache2-mod-php7.2 rar
-        pecl -v install rar
-        sed -i '2iextension=rar.so' /etc/php/7.2/apache2/php.ini
+		apt-get -y --force-yes install software-properties-common
+               add-apt-repository -y --force-yes ppa:heyarje/makemkv-beta
+               apt update -y --force-yes
+               apt -y --force-yes install makemkv-bin makemkv-oss
+               sudo npm i cloudcmd pm2 -g
+               sudo pm2 start `which cloudcmd`
+        	export LANG=C.UTF-8
+		apt-add-repository ppa:ondrej/php -y --force-yes
+		sudo apt update -qq && sudo apt dist-upgrade -qq && 
+		sudo apt install -y --force-yes php-bcmath php-zip php-dev php-xml php-pear apache2 libapache2-mod-php php-pear rar
+	        sed -i '2iextension=rar.so' /etc/php/7.2/apache2/php.ini
 		mkdir ~/FFmpegUI/FFmpeg_UI/media
 		mkdir ~/FFmpegUI/FFmpeg_UI/media/input
 		mkdir ~/FFmpegUI/FFmpeg_UI/media/tmp
 		mkdir ~/FFmpegUI/FFmpeg_UI/media/output
 		mkdir ~/FFmpegUI/FFmpeg_UI/media/backup		
 		cp -R ~/FFmpegUI/FFmpeg_UI /var/www/html/
-        sudo usermod -a -G video root
+                sudo usermod -a -G video root
+                sudo usermod -a -G postfix root
+                sudo usermod -a -G postfix www-data
 		sudo usermod -a -G cdrom www-data
 		sudo usermod -a -G video www-data
 		sudo usermod -a -G root www-data
 		sudo usermod -a -G sudo www-data
         chown -R www-data /var/www/html/FFmpeg_UI
-        echo $'\n'"$(tput setaf 2) FFmpegUI and Apache2 are installed.$(tput sgr 0)"$'\n'
+        echo $'\n'"$(tput setaf 2) FFmpegUI and Apache2 installed.$(tput sgr 0)"$'\n'
 		
         echo Your username for FFmpegUI is: "$(tput setaf 2)admin$(tput sgr 0)"
         htpasswd -c /var/.htpasswd admin
@@ -302,16 +323,18 @@ clear
 #Menu function
 function MENU {
 
-if [ $distribution = "ubuntu6418.4" ]; then
-      echo $'\n'$hr"$(tput setaf 2) FFmpegUI v.1.01 installation (VAAPI + CUDA)$(tput sgr 0)"$'\n'$hr
+if [ $distribution = "ubuntu64" ]; then
+      echo $'\n'$hr"$(tput setaf 2) FFmpegUI v.2.0 installation (VAAPI + CUDA)$(tput sgr 0)"
+      echo $' https://github.com/Sub-7/FFmpegUI'$'\n'$hr
       echo  " Distribution: $(tput setaf 2)$OS $ARCH $VERSION   $(tput sgr 0)"
+    else
+      echo  " $(tput setaf 1) Distribution not supported, see install.log in FFmpegUI folder for errors.$(tput sgr 0)"
     fi
-
     
     while read -r line
     do
     name="$line"
-	echo " MB  : $(tput setaf 2)${name:9}$(tput sgr 0)"
+	echo " MB  : $(tput setaf 2)${name:14}$(tput sgr 0)"
     done < "$MAINBOARD"
 	
 	
@@ -332,14 +355,14 @@ if [ $distribution = "ubuntu6418.4" ]; then
       NV_VERSION=$(head -n 1 $NV_V)
 	  echo " Nvidia Driver:$(tput setaf 2)${NV_VERSION:16}$(tput sgr 0)"
       else 
-      echo  " Nvidia driver:$(tput setaf 1)  is not installed$(tput sgr 0)"
+      echo  " Nvidia driver:$(tput setaf 1)  not installed$(tput sgr 0)"
     fi
 	
 	if [ -e "/usr/local/cuda/version.txt" ]; then
       CUDA_V=$(cat /usr/local/cuda/version.txt)	
       echo  " CUDA Version:$(tput setaf 2) ${CUDA_V:13}$(tput sgr 0)"
       else 
-      echo  " CUDA:$(tput setaf 1)           is not installed$(tput sgr 0)"
+      echo  " CUDA:$(tput setaf 1)           not installed$(tput sgr 0)"
     fi
 	
     if [ -e "/dev/dri/renderD128" ]; then
@@ -359,7 +382,7 @@ if [ $distribution = "ubuntu6418.4" ]; then
 }
 
 #Menu loop
-while MENU && read -e -p " Select options 1-5 (ENTER when done): " -n1 SELECTION && [[ -n "$SELECTION" ]]; do
+while MENU && read -e -p " Select options (ENTER when done): " -n1 SELECTION && [[ -n "$SELECTION" ]]; do
     clear
     if [[ "$SELECTION" == *[[:digit:]]* && $SELECTION -ge 1 && $SELECTION -le ${#options[@]} ]]; then
         (( SELECTION-- ))
