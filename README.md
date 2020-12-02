@@ -39,5 +39,7 @@ intel CPU supports VAAPI
  [x] 7 Install Apache2 and FFmpegUI
  [ ] 8 reboot
 ```
+# Known issues:
+-Filemanager does not start
 # License:
 MIT
