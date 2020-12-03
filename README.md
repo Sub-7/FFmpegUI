@@ -50,5 +50,5 @@ intel CPU supports VAAPI
 # License:
 MIT
 
-<img align="left" width="800" src="https://github.com/Sub-7/FFmpegUI/blob/master/FFmpeg_UI/images/FFmpeg_UI2.0.png">
+<img align="left" width="1200" src="https://github.com/Sub-7/FFmpegUI/blob/master/FFmpeg_UI/images/FFmpeg_UI2.0.png">
 
