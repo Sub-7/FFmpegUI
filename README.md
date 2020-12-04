@@ -42,7 +42,7 @@ intel CPU supports VAAPI
  [ ] 8 reboot
 ```
 # Known issues:
-- Filemanager does not start
+- <del>Filemanager does not start</del> Fixed
 # To Do:
 - redesign
 - get MakeMKV to run in LXC
