@@ -1,7 +1,7 @@
 #!/bin/bash
 #  FFmpegUI V2.0
 #  ffmpeg-4.1.3
-#  Sub-7 (28.06.2019)
+#  Sub-7 (04.12.2020)
 #==============================================================================
     
     OS=$(awk '/DISTRIB_ID=/' /etc/*-release | sed 's/DISTRIB_ID=//' | tr '[:upper:]' '[:lower:]')
