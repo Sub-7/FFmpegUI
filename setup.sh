@@ -296,7 +296,7 @@ function ACTIONS {
 		sudo usermod -a -G sudo www-data
 		chown -R www-data /var/www/html/FFmpeg_UI
         echo $'\n'"$(tput setaf 2) FFmpegUI and Apache2 installed.$(tput sgr 0)"$'\n'
-		
+	chmod -R 777 /var/www/html/FFmpeg_UI/media	
         echo Your username for FFmpegUI is: "$(tput setaf 2)admin$(tput sgr 0)"
         htpasswd -c /var/.htpasswd admin
         echo $'\n'"$(tput setaf 3) now edit: /etc/apache2/apache2.conf
