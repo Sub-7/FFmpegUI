@@ -49,7 +49,7 @@ intel CPU supports VAAPI
 # To Do:
 - redesign
 - get MakeMKV to run in LXC
-- get CUDA to run in LXC
+- <del>get CUDA to run in LXC</del> - fixed (Nvidia Driver Version: 460.67 | CUDA Version: 11.2)
 # License:
 MIT
 
