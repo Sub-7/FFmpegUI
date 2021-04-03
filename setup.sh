@@ -19,10 +19,11 @@ hr=$(printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -)
 lshw -C processor | grep product > HW-info/CPU
 dmidecode -t 2 | grep product > HW-info/SYSTEM
 lshw -C display | grep product > HW-info/GPU
+nvidia-smi --query-gpu=driver_version --format=csv,noheader > HW-info/NVV
 CPU=HW-info/CPU
 GPU=HW-info/GPU
 MAINBOARD=HW-info/SYSTEM
-NV_V=HW-info/NV_DR_V
+NVV=HW-info/NVV
 minsize=1
 
 actualsize1=$(wc -c <"$GPU")
@@ -91,15 +92,14 @@ function ACTIONS {
         echo $'\n'"$(tput setaf 2) ...add 'nouveau' to the blacklist.$(tput sgr 0)"$'\n'
 		echo $'blacklist nouveau\noptions nouveau modeset=0' >/etc/modprobe.d/nvidia-installer-disable-nouveau.conf
         update-initramfs -u
-        reboot
     fi
 	
     if [[ ${choices[2]} ]]; then
         #Option 3 selected
         echo $'\n'"$(tput setaf 2) ...setting up NVIDIA Driver$(tput sgr 0)"$'\n'
-		wget http://download.nvidia.com/XFree86/Linux-x86_64/430.14/NVIDIA-Linux-x86_64-430.14.run
-		sh ./NVIDIA-Linux-x86_64-430.14.run
-		rm -r NVIDIA-Linux-x86_64-430.14.run
+		wget https://de.download.nvidia.com/XFree86/Linux-x86_64/460.67/NVIDIA-Linux-x86_64-460.67.run
+		sh ./NVIDIA-Linux-x86_64-460.67.run
+		rm -r NVIDIA-Linux-x86_64-460.67.run
 		nvidia-smi
 		echo $'\n'"$(tput setaf 2) NVIDIA Driver installed.$(tput sgr 0)"$'\n'
     fi
@@ -107,9 +107,9 @@ function ACTIONS {
     if [[ ${choices[3]} ]]; then
         #Option 4 selected
         echo $'\n'"$(tput setaf 2) ...setting up NVIDIA Driver$(tput sgr 0)"$'\n'
-		wget http://download.nvidia.com/XFree86/Linux-x86_64/430.14/NVIDIA-Linux-x86_64-430.14.run
-		sh ./NVIDIA-Linux-x86_64-430.14.run --no-kernel-module
-		rm -r NVIDIA-Linux-x86_64-430.14.run
+		wget https://de.download.nvidia.com/XFree86/Linux-x86_64/460.67/NVIDIA-Linux-x86_64-460.67.run
+		sh ./NVIDIA-Linux-x86_64-460.67.run --no-kernel-module
+		rm -r NVIDIA-Linux-x86_64-460.67.run
 		nvidia-smi
 		echo $'\n'"$(tput setaf 2) NVIDIA Driver installed.$(tput sgr 0)"$'\n'
     fi	
@@ -117,20 +117,20 @@ function ACTIONS {
         #Option 5 selected
 		echo $'\n'"$(tput setaf 2) ...setting up CUDA$(tput sgr 0)"$'\n'
 		echo $'\n'"$(tput setaf 2) Please follow the command-line prompts$(tput sgr 0)"$'\n'
-		if [ -e "cuda_10.1.168_418.67_linux.run" ]; then
-			echo $'\n'"$(tput setaf 2) Found: cuda_10.1.168_418.67_linux.run$(tput sgr 0)"$'\n'
+		if [ -e "cuda_11.2.2_460.32.03_linux.run" ]; then
+			echo $'\n'"$(tput setaf 2) Found: cuda_11.2.2_460.32.03_linux.run$(tput sgr 0)"$'\n'
 		    apt-get install -y g++ freeglut3-dev build-essential libx11-dev libxmu-dev libxi-dev libglu1-mesa libglu1-mesa-dev
-		    sh ./cuda_10.1.168_418.67_linux.run --silent --toolkit --samples
+		    sh ./cuda_11.2.2_460.32.03_linux.run --silent --toolkit --samples
 		  else
-		    wget https://developer.nvidia.com/compute/cuda/10.1/Prod/local_installers/cuda_10.1.168_418.67_linux.run
-                   apt-get -y --force-yes install libxmu-dev
-		    sh ./cuda_10.1.168_418.67_linux.run --silent --toolkit --samples
+		    wget https://developer.download.nvidia.com/compute/cuda/11.2.2/local_installers/cuda_11.2.2_460.32.03_linux.run
+                   apt-get install libxmu-dev
+		    sh ./cuda_11.2.2_460.32.03_linux.run --silent --toolkit --samples
 
 		fi
 			echo "export LD_LIBRARY_PATH=/usr/local/cuda/lib64" >> ~/.profile
-			echo "PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-10.1/bin'" >> ~/.profile
-			echo "/usr/local/cuda-10.1/lib64" >> /etc/ld.so.conf
-                       echo "/usr/local/cuda-10.1/bin" >> /etc/ld.so.conf
+			echo "PATH='/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/cuda-11.2/bin'" >> ~/.profile
+			echo "/usr/local/cuda-11.2/lib64" >> /etc/ld.so.conf
+                       echo "/usr/local/cuda-11.2/bin" >> /etc/ld.so.conf
                        echo "/usr/local/cuda/include" >> /etc/ld.so.conf
 			source ~/.profile
 			sudo ldconfig		
@@ -139,6 +139,7 @@ function ACTIONS {
 	
     if [[ ${choices[5]} ]]; then
         #Option 6 selected
+        apt install -y nvidia-cuda-toolkit
 		echo $'\n'"$(tput setaf 2) ...setting up FFmpeg VAAPI+CUDA$(tput sgr 0)"$'\n'
 		git clone https://github.com/FFmpeg/nv-codec-headers.git && \
         cd ~/FFmpegUI/nv-codec-headers && \
@@ -167,20 +168,19 @@ function ACTIONS {
         #PATH="$HOME/bin:$PATH" cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX="$HOME/ffmpeg_build" -DENABLE_SHARED=off -DENABLE_NASM=on ../aom && \
         #PATH="$HOME/bin:$PATH" make && \
         #make install
-		
-        cd ~/ffmpeg_sources && \
-        wget -O ffmpeg-4.3.1.tar.bz2 https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.bz2 && \
-        tar xjvf ffmpeg-4.3.1.tar.bz2 && \
-        cd ~/ffmpeg_sources/ffmpeg-4.3.1 && \
+		cd ~/ffmpeg_sources && \
+        wget -O ffmpeg-4.3.2.tar.bz2 https://ffmpeg.org/releases/ffmpeg-4.3.2.tar.bz2 && \
+        tar xjvf ffmpeg-4.3.2.tar.bz2 && \
+        cd ~/ffmpeg_sources/ffmpeg-4.3.2 && \
          PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
            --prefix="$HOME/ffmpeg_build" \
            --pkg-config-flags="--static" \
            --extra-cflags="-I$HOME/ffmpeg_build/include" \
            --extra-ldflags="-L$HOME/ffmpeg_build/lib" \
-           --extra-libs="-lpthread -lm" \
-           --bindir="$HOME/bin" \
            --extra-cflags=-I/usr/local/cuda/include \
            --extra-ldflags=-L/usr/local/cuda/lib64 \
+           --extra-libs="-lpthread -lm" \
+           --bindir="$HOME/bin" \
            --enable-gpl \
            --enable-libass \
            --enable-libfdk-aac \
@@ -192,11 +192,11 @@ function ACTIONS {
            --enable-libx264 \
            --enable-libx265 \
            --enable-vaapi \
-           --enable-cuda \
            --enable-cuvid \
            --enable-nvenc \
            --enable-libnpp \
            --enable-libaom \
+           --enable-cuda-nvcc \
            --enable-nonfree && \
            PATH="$HOME/bin:$PATH" make && \
            make install && \
@@ -237,9 +237,9 @@ function ACTIONS {
         #make install
 		
         cd ~/ffmpeg_sources && \
-        wget -O ffmpeg-4.3.1.tar.bz2 https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.bz2 && \
-        tar xjvf ffmpeg-4.3.1.tar.bz2 && \
-        cd ~/ffmpeg_sources/ffmpeg-4.3.1 && \
+        wget -O ffmpeg-4.3.2.tar.bz2 https://ffmpeg.org/releases/ffmpeg-4.3.2.tar.bz2 && \
+        tar xjvf ffmpeg-4.3.2.tar.bz2 && \
+        cd ~/ffmpeg_sources/ffmpeg-4.3.2 && \
         PATH="$HOME/bin:$PATH" PKG_CONFIG_PATH="$HOME/ffmpeg_build/lib/pkgconfig" ./configure \
            --prefix="$HOME/ffmpeg_build" \
            --pkg-config-flags="--static" \
@@ -274,8 +274,6 @@ function ACTIONS {
                add-apt-repository ppa:heyarje/makemkv-beta -y
                apt update -y
                apt -y install makemkv-bin makemkv-oss
-               sudo npm i cloudcmd pm2 -g
-               sudo pm2 start `which cloudcmd`
         	export LANG=C.UTF-8
 		apt-add-repository ppa:ondrej/php -y --force-yes
 		sudo apt update -qq && sudo apt dist-upgrade -qq && 
@@ -294,9 +292,10 @@ function ACTIONS {
 		sudo usermod -a -G video www-data
 		sudo usermod -a -G root www-data
 		sudo usermod -a -G sudo www-data
+        pip3 install --upgrade youtube-dl
 		chown -R www-data /var/www/html/FFmpeg_UI
         echo $'\n'"$(tput setaf 2) FFmpegUI and Apache2 installed.$(tput sgr 0)"$'\n'
-	chmod -R 777 /var/www/html/FFmpeg_UI/media	
+	    chmod -R 777 /var/www/html/FFmpeg_UI/media	
         echo Your username for FFmpegUI is: "$(tput setaf 2)admin$(tput sgr 0)"
         htpasswd -c /var/.htpasswd admin
         echo $'\n'"$(tput setaf 3) now edit: /etc/apache2/apache2.conf
@@ -355,15 +354,15 @@ if [ $distribution = "ubuntu64" ]; then
 	
 	
 	if [ -e "/usr/bin/nvidia-smi" ]; then
-      NV_VERSION=$(head -n 1 $NV_V)
-	  echo " Nvidia Driver:$(tput setaf 2)${NV_VERSION:16}$(tput sgr 0)"
+      NV_VERSION=$(head -n 1 $NVV)
+	  echo " Nvidia Driver:$(tput setaf 2)${NV_VERSION}$(tput sgr 0)"
       else 
       echo  " Nvidia driver:$(tput setaf 1)  not installed$(tput sgr 0)"
     fi
 	
-	if [ -e "/usr/local/cuda/version.txt" ]; then
-      CUDA_V=$(cat /usr/local/cuda/version.txt)	
-      echo  " CUDA Version:$(tput setaf 2) ${CUDA_V:13}$(tput sgr 0)"
+	if [ -e "/usr/local/cuda/version.json" ]; then
+      CUDA_V=$(jq '.cuda_cudart.version' /usr/local/cuda/version.json)	
+      echo  " CUDA Version:$(tput setaf 2) ${CUDA_V}$(tput sgr 0)"
       else 
       echo  " CUDA:$(tput setaf 1)           not installed$(tput sgr 0)"
     fi
