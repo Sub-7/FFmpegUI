@@ -63,7 +63,7 @@
 	$scale_nv=$_POST["scale"];
 	$scale_npp = str_replace('_vaapi', '_npp', $scale_nv);
 	$ffmpeg_line = "ffmpeg $loglevel $nvidia_gpu -y -i $input_file -map 0:0 $map_0_1 $map_0_2 $map_0_3 $map_0_4 $map_0_5 $map_0_6 $map_0_7 $scale_npp $video_bitrate $video_codec $map_0_1_codec $map_0_1_bitrate $map_0_2_codec $map_0_2_bitrate $map_0_3_codec $map_0_3_bitrate $map_0_4_codec $map_0_4_bitrate $map_0_5_codec $map_0_5_bitrate $map_0_6_codec $map_0_6_bitrate $map_0_7_subtitle $output_file_format.$file_end $format 2> progress.txt";
-	echo $ffmpeg_line; ///shows what ffmpeg is doing, here with CUDA
+	//echo $ffmpeg_line; ///shows what ffmpeg is doing, here with CUDA
 	$ffmpeg_encode = shell_exec("$ffmpeg_line");
 	}    
 	
