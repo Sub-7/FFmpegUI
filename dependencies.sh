@@ -2,6 +2,8 @@
 
 sudo apt update -qq && sudo apt dist-upgrade -qq && sudo apt -y install \
   autoconf \
+  jq \
+  initramfs-tools \
   automake \
   build-essential \
   cmake \
@@ -16,13 +18,13 @@ sudo apt update -qq && sudo apt dist-upgrade -qq && sudo apt -y install \
   libxcb1-dev \
   libxcb-shm0-dev \
   libxcb-xfixes0-dev \
-  nodejs \
-  npm \
+  curl \
   pkg-config \
   texinfo \
   wget \
   zlib1g-dev \
-  gcc \
+  gcc-7 \
+  g++-7 \
   i965-va-driver \
   vainfo \
   vdpauinfo \
@@ -39,6 +41,8 @@ sudo apt update -qq && sudo apt dist-upgrade -qq && sudo apt -y install \
   software-properties-common \
   yasm
 
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+sudo apt-get install -y nodejs xdg-utils
 sudo npm install cloudcmd -g  
 #write out current crontab
 crontab -l > cloudcmd
@@ -49,4 +53,3 @@ crontab cloudcmd
 rm cloudcmd
 sudo apt autoremove -y
 echo '\n'"$(tput setaf 2) Dependencies are installed.$(tput sgr 0)"'\n'
-
