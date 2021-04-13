@@ -52,6 +52,7 @@ MIT
 <img align="left" width="1200" src="https://github.com/Sub-7/FFmpegUI/blob/master/FFmpeg_UI/images/FFmpeg_UI2.0.png">
 
 
+
 # Donation:
 if my work helps you, you could buy me a coffee.
 
