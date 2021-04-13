@@ -53,4 +53,4 @@ MIT
 
 # Donation:
 if you want to support my work.
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/paypalme/SubS7v7n)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/paypalme/SubS7v7n)
