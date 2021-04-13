@@ -51,7 +51,8 @@ MIT
 
 <img align="left" width="1200" src="https://github.com/Sub-7/FFmpegUI/blob/master/FFmpeg_UI/images/FFmpeg_UI2.0.png">
 
+
 # Donation:
-if you want to support my work.
+if my work helps you, you could buy me a coffee.
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/paypalme/SubS7v7n)
