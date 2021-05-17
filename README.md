@@ -1,6 +1,11 @@
 # FFmpegUI v2.0 [![Build Status](https://travis-ci.com/Sub-7/FFmpegUI.svg?branch=master)](https://travis-ci.com/Sub-7/FFmpegUI) ![Crates.io](https://img.shields.io/crates/l/rustc-serialize.svg)
 FFmpegUI is a graphical web interface for the famous FFmpeg
 
+# Donation:
+if my work helps you, you could buy me a coffee.
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/paypalme/SubS7v7n)
+
 # Security:
 - only for local networks, no public access!
 
@@ -50,8 +55,3 @@ intel CPU supports VAAPI
 MIT
 
 <img align="left" width="1200" src="https://github.com/Sub-7/FFmpegUI/blob/master/FFmpeg_UI/images/FFmpeg_UI2.0.png">
-
-# Donation:
-if my work helps you, you could buy me a coffee.
-
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/paypalme/SubS7v7n)
