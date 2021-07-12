@@ -97,9 +97,9 @@ function ACTIONS {
     if [[ ${choices[2]} ]]; then
         #Option 3 selected
         echo $'\n'"$(tput setaf 2) ...setting up NVIDIA Driver$(tput sgr 0)"$'\n'
-		wget https://de.download.nvidia.com/XFree86/Linux-x86_64/460.67/NVIDIA-Linux-x86_64-460.67.run
-		sh ./NVIDIA-Linux-x86_64-460.67.run
-		rm -r NVIDIA-Linux-x86_64-460.67.run
+		wget https://us.download.nvidia.com/XFree86/Linux-x86_64/460.73.01/NVIDIA-Linux-x86_64-460.73.01.run
+		sh ./NVIDIA-Linux-x86_64-460.73.01.run
+		rm -r NVIDIA-Linux-x86_64-460.73.01.run
 		nvidia-smi
 		echo $'\n'"$(tput setaf 2) NVIDIA Driver installed.$(tput sgr 0)"$'\n'
     fi
@@ -107,9 +107,9 @@ function ACTIONS {
     if [[ ${choices[3]} ]]; then
         #Option 4 selected
         echo $'\n'"$(tput setaf 2) ...setting up NVIDIA Driver$(tput sgr 0)"$'\n'
-		wget https://de.download.nvidia.com/XFree86/Linux-x86_64/460.67/NVIDIA-Linux-x86_64-460.67.run
-		sh ./NVIDIA-Linux-x86_64-460.67.run --no-kernel-module
-		rm -r NVIDIA-Linux-x86_64-460.67.run
+		wget https://us.download.nvidia.com/XFree86/Linux-x86_64/460.73.01/NVIDIA-Linux-x86_64-460.73.01.run
+		sh ./NVIDIA-Linux-x86_64-460.73.01.run --no-kernel-module
+		rm -r NVIDIA-Linux-x86_64-460.73.01.run
 		nvidia-smi
 		echo $'\n'"$(tput setaf 2) NVIDIA Driver installed.$(tput sgr 0)"$'\n'
     fi	
