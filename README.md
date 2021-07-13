@@ -48,7 +48,7 @@ intel CPU supports VAAPI
 # Known issues:
 - get MakeMKV to run in LXC
 - <del>Filemanager does not start</del> : Fixed
-- <del>get CUDA to run in LXC</del> : Fixed (Nvidia Driver Version: 460.67 | CUDA Version: 11.2)
+- <del>get CUDA to run in LXC</del> : Fixed (Nvidia Driver Version: 460.73.01 | CUDA Version: 11.2)
 # To Do:
 - redesign
 # License:
